@@ -1,0 +1,19 @@
+
+[
+  {
+    "modid": "base_sciences",
+    "name": "Base Sciences",
+    "description": "Base Sciences: Chemistry, Geology, and Heavy Metal",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://minecraft.curseforge.com/projects/base-sciences",
+    "updateUrl": "",
+    "authorList": ["bms_"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": ["forgelin"]
+
+  }
+
+]

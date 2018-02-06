@@ -5,9 +5,11 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.10"
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'kotlin'
 
 minecraft {
     version = "1.12.2-14.23.0.2486"
@@ -29,17 +31,21 @@ repositories {
 
 dependencies {
     compile "com.mcmoddev:BaseMetals:1.12-2.5.0-beta4.126:deobf"
-    compile "com.mcmoddev:BaseGems:1.12-2.5.0-beta3.3:deobf"
     compile group: "net.shadowfacts", name: "Forgelin", version: "1.6.0"
 }
 
 version = "${minecraft.version}-0.0.1"
-group = "net.bms.geology"
+group = "com.mcmoddev.basesciences"
 archivesBaseName = "BaseSciences"
 
 sourceCompatibility = targetCompatibility = "1.8"
 compileJava {
     sourceCompatibility = targetCompatibility = "1.8"
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+    main.kotlin.srcDirs += 'src/main/kotlin'
 }
 
 processResources {
