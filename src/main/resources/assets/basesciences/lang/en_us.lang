@@ -1,1 +1,8 @@
-tooltip.iron_ingot.rock_type=Found in: Sedimentary Rocks
+tooltip.magnetite.name=Magnetite
+tooltip.magnetite.formula=Fe3O4
+
+tooltip.bituminous_coal.name=Bituminous Coal
+
+tile.blast_furnace_brick.name=Blast Furnace Brick
+
+itemGroup.base_sciences=Base Sciences

@@ -1,50 +1,58 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        maven {
+            name 'forge'
+            url 'http://files.minecraftforge.net/maven'
+        }
+        maven {
+            name 'gradle'
+            url 'https://plugins.gradle.org/m2/'
+        }
+        maven {
+            name 'sonatype'
+            url 'https://oss.sonatype.org/content/groups/public'
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.10"
+        classpath "net.minecraftforge.gradle:ForgeGradle:$fg_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'kotlin'
 
 minecraft {
-    version = "1.12.2-14.23.0.2486"
+    version = "$mc_version_2-$forge_version"
     runDir = "run"
-    mappings = "snapshot_20180201"
+    mappings = "snapshot_20180327"
+
+    replace '@VERSION@', project.version
+    replace '@FINGERPRINT@', project.findProperty('signSHA1')
+    replaceIn "BaseSciences.kt"
+
 }
 
 repositories {
     jcenter ()
+    maven { // forgelin
+        name 'shadowfacts'
+        url 'http://maven.shadowfacts.net/'
+    }
     maven { // mmd
         name 'mmd'
         url 'https://maven.mcmoddev.com/'
     }
-    maven {
-        name 'shadowfacts'
-        url 'http://maven.shadowfacts.net/'
-    }
 }
 
 dependencies {
-    compile "com.mcmoddev:BaseMetals:1.12-2.5.0-beta4.126:deobf"
-    compile group: "net.shadowfacts", name: "Forgelin", version: "1.6.0"
-}
-
-version = "${minecraft.version}-0.0.1"
-group = "com.mcmoddev.basesciences"
-archivesBaseName = "BaseSciences"
-
-sourceCompatibility = targetCompatibility = "1.8"
-compileJava {
-    sourceCompatibility = targetCompatibility = "1.8"
+    compile group: "com.mcmoddev", name: "OreSpawn", version: "$mc_version-$os_version"
+    compile group: "com.mcmoddev", name: "BaseMetals", version: "$mc_version-$bme_version"
+    compile group: "com.mcmoddev", name: "BaseMinerals", version: "$mc_version-$bme_version"
+    compile group: "net.shadowfacts", name: "Forgelin", version: forgelin_version
 }
 
 sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
     main.kotlin.srcDirs += 'src/main/kotlin'
 }
 
@@ -62,3 +70,17 @@ processResources {
         exclude 'mcmod.info'
     }
 }
+
+task signJar(type: SignJar, dependsOn: reobfJar) {
+    onlyIf {
+        project.hasProperty('keyStore')
+    }
+    keyStore = project.findProperty('keyStore')
+    alias = project.findProperty('keyStoreAlias')
+    storePass = project.findProperty('keyStorePass')
+    keyPass = project.findProperty('keyStoreKeyPass')
+    inputFile = jar.archivePath
+    outputFile = jar.archivePath
+}
+
+build.dependsOn signJar
