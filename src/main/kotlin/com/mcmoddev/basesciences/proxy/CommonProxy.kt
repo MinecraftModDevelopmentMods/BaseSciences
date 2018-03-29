@@ -1,5 +1,6 @@
 package com.mcmoddev.basesciences.proxy
 
+import com.mcmoddev.basesciences.init.TileEntities
 import com.mcmoddev.basesciences.util.EventHandler
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
@@ -8,6 +9,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 
 open class CommonProxy {
     open fun preInit(event: FMLPreInitializationEvent) {
+        TileEntities.init()
         MinecraftForge.EVENT_BUS.register(EventHandler())
     }
 
