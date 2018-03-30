@@ -7,17 +7,17 @@ import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.ITickable
 import net.minecraft.util.math.BlockPos
 
-class TileEntityBlastFurnaceBrick: TileEntity(), ITickable {
+class TileEntityBlastFurnaceBrick(): TileEntity(), ITickable {
     var hasMaster = false
     var isMaster = false
     var masterPos: BlockPos = BlockPos.ORIGIN
+    var detector: MultiblockDetector? = null
 
     override fun update() {
-        val detector = MultiblockDetector(pos, EnumMultiblockForm.BLAST_FURNACE, world)
-        if (detector.isMultiblock() && !hasMaster)
-            detector.inform()
-        else if (!detector.isMultiblock() && hasMaster)
-            detector.reset()
+        if (detector == null)
+            detector = MultiblockDetector(pos, EnumMultiblockForm.BLAST_FURNACE, world)
+        if (detector!!.isMultiblock() && !hasMaster)
+            detector!!.inform()
     }
 
     override fun writeToNBT(compound: NBTTagCompound?): NBTTagCompound {

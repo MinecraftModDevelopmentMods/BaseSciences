@@ -19,6 +19,12 @@ class BlockBlastFurnaceBrick (name: String): Block(Material.IRON) {
     }
 
     override fun onNeighborChange(world: IBlockAccess?, pos: BlockPos?, neighbor: BlockPos?) {
+        val te = world?.getTileEntity(pos!!)
+        if (te != null && te is TileEntityBlastFurnaceBrick) {
+            val master = world.getTileEntity(te.masterPos)
+            if (master != null && master is TileEntityBlastFurnaceBrick && !master.detector?.isMultiblock()!! && master.hasMaster)
+                master.detector?.reset()
+        }
         super.onNeighborChange(world!!, pos!!, neighbor!!)
     }
 

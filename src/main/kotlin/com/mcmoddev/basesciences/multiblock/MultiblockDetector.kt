@@ -20,7 +20,6 @@ class MultiblockDetector(private val pos: BlockPos, private val form: EnumMultib
     }
 
     fun inform() {
-        println("Multiblock with type of ${form.name} and master located at (${pos.x}, ${pos.y}, ${pos.z}) was just created.")
         for (x: Int in (pos.x - 1)..(pos.x + 1))
             for (y: Int in pos.y..(pos.y + 3))
                 for (z: Int in (pos.z - 1)..(pos.z + 1)) {
@@ -35,7 +34,6 @@ class MultiblockDetector(private val pos: BlockPos, private val form: EnumMultib
     }
 
     fun reset() {
-        println("Multiblock with type of ${form.name} and master located at (${pos.x}, ${pos.y}, ${pos.z}) was just demolished.")
         for (x: Int in (pos.x - 1)..(pos.x + 1))
             for (y: Int in pos.y..(pos.y + 3))
                 for (z: Int in (pos.z - 1)..(pos.z + 1)) {
