@@ -1,7 +1,6 @@
 package com.mcmoddev.basesciences.block
 
 import com.mcmoddev.basesciences.BaseSciences
-import com.mcmoddev.basesciences.tile.TileEntityBlastFurnaceBrick
 import com.mcmoddev.basesciences.tile.TileEntityCokeOvenBrick
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
@@ -21,9 +20,9 @@ class BlockCokeOvenBrick(name: String): Block(Material.ROCK) {
 
     override fun onNeighborChange(world: IBlockAccess?, pos: BlockPos?, neighbor: BlockPos?) {
         val te = world?.getTileEntity(pos!!)
-        if (te != null && te is TileEntityBlastFurnaceBrick) {
+        if (te != null && te is TileEntityCokeOvenBrick) {
             val master = world.getTileEntity(te.masterPos)
-            if (master != null && master is TileEntityBlastFurnaceBrick && !master.detector?.isMultiblock()!! && master.hasMaster)
+            if (master != null && master is TileEntityCokeOvenBrick && !master.detector?.isMultiblock()!! && master.hasMaster)
                 master.detector?.reset()
         }
         super.onNeighborChange(world!!, pos!!, neighbor!!)

@@ -49,6 +49,7 @@ dependencies {
     compile group: "com.mcmoddev", name: "OreSpawn", version: "$mc_version-$os_version"
     compile group: "com.mcmoddev", name: "BaseMetals", version: "$mc_version-$bme_version"
     compile group: "com.mcmoddev", name: "BaseMinerals", version: "$mc_version-$bme_version"
+    compile group: "com.mcmoddev", name: "Mineralogy", version:"$mc_version-$min_version"
     compile group: "net.shadowfacts", name: "Forgelin", version: forgelin_version
 }
 

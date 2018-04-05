@@ -5,5 +5,5 @@ import net.minecraft.block.Block
 
 enum class EnumMultiblockForm(val block: Block) {
     BLAST_FURNACE(Blocks.blockBlastFurnaceBrick),
-    COKE_OVEN(Blocks.blockCokeOvenBrick)
+    COKE_OVEN(Blocks.blockCokeOvenBrick);
 }
