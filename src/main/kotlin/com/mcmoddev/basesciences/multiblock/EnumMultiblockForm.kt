@@ -4,5 +4,6 @@ import com.mcmoddev.basesciences.init.Blocks
 import net.minecraft.block.Block
 
 enum class EnumMultiblockForm(val block: Block) {
-    BLAST_FURNACE(Blocks.blockBlastFurnaceBrick);
+    BLAST_FURNACE(Blocks.blockBlastFurnaceBrick),
+    COKE_OVEN(Blocks.blockCokeOvenBrick)
 }

@@ -3,6 +3,9 @@ tooltip.magnetite.formula=Fe3O4
 
 tooltip.bituminous_coal.name=Bituminous Coal
 
+item.coal_coke.name=Coal Coke
+
 tile.blast_furnace_brick.name=Blast Furnace Brick
+tile.coke_oven_brick.name=Coke Oven Brick
 
 itemGroup.base_sciences=Base Sciences

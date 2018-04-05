@@ -1,6 +1,6 @@
 package com.mcmoddev.basesciences.multiblock
 
-import com.mcmoddev.basesciences.tile.TileEntityBlastFurnaceBrick
+import com.mcmoddev.basesciences.tile.TileEntityMultiblock
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
@@ -19,13 +19,14 @@ class MultiblockDetector(private val pos: BlockPos, private val form: EnumMultib
         return counter == 33 && world.isAirBlock(pos.add(0, 1, 0)) && world.isAirBlock(pos.add(0, 2, 0))
     }
 
+    // informs all blocks in the structure of the structure's construction
     fun inform() {
         for (x: Int in (pos.x - 1)..(pos.x + 1))
             for (y: Int in pos.y..(pos.y + 3))
                 for (z: Int in (pos.z - 1)..(pos.z + 1)) {
                     val currentPos = BlockPos(x, y, z)
                     val te = world.getTileEntity(currentPos)
-                    if (te != null && te is TileEntityBlastFurnaceBrick) {
+                    if (te != null && te is TileEntityMultiblock) {
                         te.hasMaster = true
                         te.isMaster = currentPos == pos
                         te.masterPos = pos
@@ -33,13 +34,14 @@ class MultiblockDetector(private val pos: BlockPos, private val form: EnumMultib
                 }
     }
 
+    // informs all blocks in the structure of the structure's destruction
     fun reset() {
         for (x: Int in (pos.x - 1)..(pos.x + 1))
             for (y: Int in pos.y..(pos.y + 3))
                 for (z: Int in (pos.z - 1)..(pos.z + 1)) {
                     val currentPos = BlockPos(x, y, z)
                     val te = world.getTileEntity(currentPos)
-                    if (te != null && te is TileEntityBlastFurnaceBrick) {
+                    if (te != null && te is TileEntityMultiblock) {
                         te.hasMaster = false
                         te.isMaster = false
                         te.masterPos = BlockPos.ORIGIN
