@@ -3,7 +3,7 @@ buildscript {
         jcenter()
         maven {
             name 'forge'
-            url 'http://files.minecraftforge.net/maven'
+            url 'https://maven.minecraftforge.net/'
         }
         maven {
             name 'gradle'
@@ -16,12 +16,10 @@ buildscript {
     }
     dependencies {
         classpath "net.minecraftforge.gradle:ForgeGradle:$fg_version"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'kotlin'
 
 minecraft {
     version = "$mc_version_2-$forge_version"
@@ -30,15 +28,11 @@ minecraft {
 
     replace '@VERSION@', project.version
     replace '@FINGERPRINT@', project.findProperty('signSHA1')
-    replaceIn "BaseSciences.kt"
+    replaceIn "BaseSciences.java"
 }
 
 repositories {
     jcenter ()
-    maven { // forgelin
-        name 'shadowfacts'
-        url 'http://maven.shadowfacts.net/'
-    }
     maven { // mmd
         name 'mmd'
         url 'https://maven.mcmoddev.com/'
@@ -50,11 +44,7 @@ dependencies {
     compile group: "com.mcmoddev", name: "BaseMetals", version: "$mc_version-$bme_version"
     compile group: "com.mcmoddev", name: "BaseMinerals", version: "$mc_version-$bme_version"
     compile group: "com.mcmoddev", name: "Mineralogy", version:"$mc_version-$min_version"
-    compile group: "net.shadowfacts", name: "Forgelin", version: forgelin_version
-}
-
-sourceSets {
-    main.kotlin.srcDirs += 'src/main/kotlin'
+    compile group: "com.mcmoddev", name: "MMDLib", version:"$mc_version-$mmdlib_version"
 }
 
 processResources {
